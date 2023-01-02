@@ -34,6 +34,14 @@ class Person(BaseModel):
     password: str = Field(..., min_length=8)
 
 
+class PersonOut(BaseModel): 
+    first_name: str = Field(..., min_length=0, max_length=50, example="Miguel")
+    last_name: str = Field(..., min_length=0, max_length=50, example="Torres")
+    age: int = Field(..., gt=0, le=115, example=25)
+    hair_color: Optional[HairColor] = Field(default=None, example=HairColor.black)
+    is_married: Optional[bool] = Field(default=None, example=False)
+
+
 #Path operations "decorator"
 @app.get("/")
 def home():
@@ -41,7 +49,7 @@ def home():
 
 
 #Request and Response Body
-@app.post("/person/new")
+@app.post("/person/new", response_model=PersonOut)
 def create_person(person: Person = Body(...)):
     return person
 
