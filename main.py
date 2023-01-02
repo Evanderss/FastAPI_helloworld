@@ -29,8 +29,9 @@ class Person(BaseModel):
     first_name: str = Field(..., min_length=0, max_length=50, example="Miguel")
     last_name: str = Field(..., min_length=0, max_length=50, example="Torres")
     age: int = Field(..., gt=0, le=115, example=25)
-    hair_color: Optional[HairColor] = Field(default=None, example=HairColor.black, example=HairColor.black)
+    hair_color: Optional[HairColor] = Field(default=None, example=HairColor.black)
     is_married: Optional[bool] = Field(default=None, example=False)
+    password: str = Field(..., min_length=8)
 
 
 #Path operations "decorator"
